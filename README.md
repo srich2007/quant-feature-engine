@@ -21,7 +21,7 @@ python main.py
 # Or import directly:
 from signal_generator import generate_signal_strength
 
-## Dependencies
--pandas
--numpy
--yfinance
+Dependencies
+import pandas as pd
+import numpy as np
+import yfinance as yf
