@@ -20,3 +20,8 @@ A signal generator that uses raw OHLCV data to generate alpha. Combines RSI, mov
 python main.py
 # Or import directly:
 from signal_generator import generate_signal_strength
+
+## Dependencies
+-pandas
+-numpy
+-yfinance
