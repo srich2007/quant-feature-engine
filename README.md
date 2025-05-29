@@ -12,7 +12,7 @@ A signal generator that uses raw OHLCV data to generate alpha. Combines RSI, mov
 
 | Date       | Close | RSI | 10 MA | 50 MA | Volume Spike | Signal Score |
 |------------|-------|-----|--------|--------|---------------|----------------|
-| 2024-01-15 | 312.4 | 41  | 308.2 | 301.7  | True          | 3              |
+| 2024-01-15 | 312.4 | 25  | 308.2 | 301.7  | True          | 3              |
 
 ## Usage
 
