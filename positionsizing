@@ -1,0 +1,42 @@
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#Imports Stock Data from Yahoo Finance
+def get_data(ticker):
+    df = yf.download(ticker, period='1y', interval='1d')
+    return df
+
+ticker = input('Enter ticker symbol: ')
+df = get_data(ticker)
+
+
+#Calculates Daily Return and Volatility
+df['DailyReturn'] = df['Close'].pct_change()
+df['Volatility'] = df['DailyReturn'].rolling(30).std()
+
+import numpy as np
+
+#Creates Volatility Threshold Conditions
+conditions = [
+    df['Volatility'] > 0.03,
+    df['Volatility'] < 0.01
+]
+choices = [5000, 20000]
+df['PositionSize'] = np.select(conditions, choices, default=10000)
+
+initial_balance = 10000
+
+#Compares Returns
+df['Regular Return'] = (1 + df['DailyReturn']).cumprod()
+df['Strategy Return'] = (1 + df['DailyReturn'] * df['PositionSize'] / initial_balance).cumprod()
+
+
+#Plots
+plt.plot(df['Regular Return'], label='Regular Return', color='red')
+plt.plot(df['Strategy Return'], label='Strategy Return', color='green')
+plt.xlabel('Date')
+plt.ylabel('Returns')
+plt.legend()
+plt.tight_layout()
+plt.show()
